@@ -25,6 +25,20 @@ CREATE TABLE IF NOT EXISTS `customer` (
 
 ALTER TABLE customer
 ADD site VARCHAR(50);
+
+CREATE TABLE IF NOT EXISTS `produtos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(200) NOT NULL,
+  `descricao` text NOT NULL,
+  `valorcompra` varchar(20) NOT NULL,
+  `valorvenda` varchar(20) NOT NULL,
+  `lucro` varchar(20) NOT NULL,
+  `disponivel` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+ALTER TABLE produtos
+ADD quantidade VARCHAR(50);
 --
 -- Dumping data for table`customer`
 --
