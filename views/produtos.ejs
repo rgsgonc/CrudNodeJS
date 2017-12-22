@@ -1,0 +1,46 @@
+<%- include layouts/header.ejs %>
+        <div class="page-data">
+         <div class="data-btn">
+           <button onClick="addProdutos();">Adicionar</button>
+         </div>
+         <div class="data-table">
+            <table border="1" cellpadding="7" cellspacing="7" id="tableProdutos">
+                <tr>
+                    <th width="40px">Id</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Valor compra</th>
+                    <th>Valor Venda</th>
+                    <th>Lucro</th>
+                    <th>Disponível?</th>
+                    <th width="150px">Ações</th>
+                </tr>
+                               
+                <% if(data.length){ 
+                 for(var i = 0;i < data.length;i++) { %>   
+                <tr>
+                    <td align="center"><%=(i+1)%></td>
+                    <td align="center"><%=data[i].nome%></td>
+                    <td align="center"><%=data[i].descricao%></td>
+                    <td align="center"><%=data[i].quantidade%></td>
+                    <td align="center"><%=data[i].valorcompra%></td>
+                    <td align="center"><%=data[i].valorvenda%></td>
+                    <td align="center"><%=data[i].lucro%></td>
+                    <td align="center" id="disponivel"><%=data[i].disponivel%></td>
+                    <td>
+                        <a class="a-inside edit" href="../produtos/edit/<%=data[i].id%>">Editar</a>
+                        <a class="a-inside delete" href="../produtos/delete/<%=data[i].id%>">Deletar</a>
+                    </td>
+                </tr>
+            <% }
+            
+             }else{ %>
+                 <tr>
+                    <td colspan="8" align="center">Sem produtos cadastrados!</td>
+                 </tr>
+            <% } %>  
+            </table>
+         </div>
+        </div>
+<%- include layouts/footer.ejs %>
