@@ -1,18 +1,22 @@
-
-/**
- * Module dependencies.
- */
-
+//ADD DEPENDENCIAS
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var passport = require('passport');
+var flash    = require('connect-flash');
 
-//load customers route
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
+
+//CARREGA AS ROTAS
 var customers = require('./routes/customers');
 var produtos = require('./routes/produtos'); 
+var demandas = require('./routes/demandas'); 
 var app = express();
 
+//CONEXAO COM O BANCO
 var connection  = require('express-myconnection'); 
 var mysql = require('mysql');
 
@@ -20,7 +24,8 @@ var mysql = require('mysql');
 app.set('port', process.env.PORT || 4300);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-//app.use(express.favicon());
+
+//APP USE
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
@@ -40,12 +45,12 @@ if ('development' == app.get('env')) {
 
 app.use(    
     connection(mysql,{
-        host: 'localhost', //'localhost',
+        host: 'localhost', 
         user: 'root',
         password : '190470',
-        port : 3306, //port mysql
+        port : 3306, 
         database:'nodejs'
-    },'pool') //or single
+    },'pool')
 );
 
 app.get('/', routes.index);
@@ -62,6 +67,15 @@ app.post('/produtos/add', produtos.save);
 app.get('/produtos/delete/:id', produtos.delete_produtos);
 app.get('/produtos/edit/:id', produtos.edit);
 app.post('/produtos/edit/:id',produtos.save_edit);
+
+app.get('/demandas', demandas.list);
+app.get('/demandas/add', demandas.add);
+app.post('/demandas/add', demandas.save);
+app.get('/demandas/delete/:id', demandas.delete_demandas);
+app.get('/demandas/edit/:id', demandas.edit);
+app.post('/demandas/edit/:id',demandas.save_edit);
+app.get('/demandas/gerar/:id', demandas.gerar);
+app.post('/demandas/gerar/:id',demandas.gerar);
 app.use(app.router);
 
 http.createServer(app).listen(app.get('port'), function(){
