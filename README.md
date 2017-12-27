@@ -12,6 +12,13 @@ http://localhost:4300/
 * http://teknosains.com/i/simple-crud-nodejs-mysql (Tutorial)
 * https://pure-escarpment-92493.herokuapp.com (Heroku)
 
+# Informações
+Para alterar a extensão da view de .ejs para .html bastar alterar as linhas abaixo no arquivo de configuração (app.js)
+```
+app.set('view engine', 'html');
+app.engine('html',require('ejs').renderFile);
+```
+
 # SQL
 ```
 CREATE TABLE IF NOT EXISTS `customer` (
