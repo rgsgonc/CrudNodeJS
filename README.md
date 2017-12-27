@@ -12,6 +12,13 @@ http://localhost:4300/
 * http://teknosains.com/i/simple-crud-nodejs-mysql (Tutorial)
 * https://pure-escarpment-92493.herokuapp.com (Heroku)
 
+# Informações
+Para alterar a extensão da view de .ejs para .html bastar alterar as linhas abaixo no arquivo de configuração (app.js)
+```
+app.set('view engine', 'html');
+app.engine('html',require('ejs').renderFile);
+```
+
 # SQL
 ```
 CREATE TABLE IF NOT EXISTS `customer` (
@@ -39,6 +46,18 @@ CREATE TABLE IF NOT EXISTS `produtos` (
 
 ALTER TABLE produtos
 ADD quantidade VARCHAR(50);
+
+CREATE TABLE IF NOT EXISTS `demandas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `solucaoproduto` varchar(200) NOT NULL,
+  `oquefazer` varchar(500) NOT NULL,
+  `versaoproduto` varchar(200) NOT NULL,
+  `baseservidor` varchar(20) NOT NULL,
+  `prazo` varchar(20) NOT NULL,
+  `impactodesenv` varchar(20) NOT NULL,
+  `clienteespecifico` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 --
 -- Dumping data for table`customer`
 --
